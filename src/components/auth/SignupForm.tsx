@@ -109,6 +109,7 @@ export function SignupForm() {
       });
 
       if (error) {
+        console.error("Signup error:", error);
         if (error.message.includes("User already registered")) {
           toast({
             variant: "destructive",
@@ -129,6 +130,13 @@ export function SignupForm() {
         });
         navigate("/dashboard");
       }
+    } catch (exception) {
+      console.error("Signup exception:", exception);
+      toast({
+        variant: "destructive",
+        title: "Erro ao cadastrar",
+        description: exception instanceof Error ? exception.message : "Ocorreu um erro inesperado. Tente novamente.",
+      });
     } finally {
       setIsLoading(false);
     }
